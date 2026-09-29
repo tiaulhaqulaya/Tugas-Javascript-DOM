@@ -92,3 +92,28 @@ body {
 .btn-hapus:hover {
     background-color: #C9BBD9;
 }
+
+#statistik {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+#statistik p {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    margin: 0;
+    background-color: #F8F4FA;
+    border-radius: 12px;
+    color: #5C4B68;
+    font-size: 14px;
+}
+
+#statistik span {
+    display: block;
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}

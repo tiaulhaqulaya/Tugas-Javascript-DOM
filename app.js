@@ -60,13 +60,33 @@ function tambahTugas() {
     // Jika checkbox dicentang, class "selesai" akan ditambahkan.
     // Jika checkbox dilepas, class "selesai" akan dihapus kembali.
     checkbox.addEventListener("change", function() {
-        teksTugas.classList.toggle("selesai");
+
+    // Menambahkan atau menghapus efek coret
+    teksTugas.classList.toggle("selesai");
+
+    // Jika checkbox dicentang
+    if (checkbox.checked) {
+        tugasSelesai++;
+    } else {
+        tugasSelesai--;
+    }
+
+    // Memperbarui angka Selesai
+    perbaruiSelesai();
+    perbaruiBelumSelesai();
     });
 
 
     // TOMBOL HAPUS remove() digunakan untuk menghapus tugas dari halaman.
     btnHapus.addEventListener("click", function() {
-        tugasBaru.remove();
+    if (checkbox.checked) {
+        tugasSelesai--;
+    }
+    totalTugas--;
+    tugasBaru.remove();
+    perbaruiTotal();
+    perbaruiSelesai();
+    perbaruiBelumSelesai();
     });
 
     // MEMASUKKAN ELEMEN KE DALAM <li>
@@ -77,6 +97,10 @@ function tambahTugas() {
 
     // MEMASUKKAN <li> KE DALAM <ul>
     daftarTugas.appendChild(tugasBaru);
+    totalTugas++;
+    perbaruiTotal();
+    perbaruiBelumSelesai();
+    inputTugas.value = "";
 
   
     // MENGOSONGKAN INPUT
@@ -100,3 +124,27 @@ inputTugas.addEventListener("keyup", function(event) {
         tambahTugas();
     }
 });
+
+// SELEKSI ELEMEN STATISTIK
+const jumlahTotal = document.getElementById("jumlah-total");
+const jumlahSelesai = document.getElementById("jumlah-selesai");
+const jumlahBelumSelesai = document.getElementById("jumlah-belum-selesai");
+
+// Menyimpan jumlah seluruh tugas
+let totalTugas = 0;
+// FUNGSI MEMPERBARUI TOTAL TUGAS
+function perbaruiTotal() {
+    jumlahTotal.innerText = totalTugas;
+}
+
+// Menyimpan jumlah seluruh tugas selesai
+let tugasSelesai = 0;
+// FUNGSI MEMPERBARUI TUGAS SELESAI
+function perbaruiSelesai() {
+    jumlahSelesai.innerText = tugasSelesai;
+}
+
+// FUNGSI MEMPERBARUI TUGAS BELUM SELESAI
+function perbaruiBelumSelesai() {
+    jumlahBelumSelesai.innerText = totalTugas - tugasSelesai;
+}
